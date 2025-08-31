@@ -1,5 +1,7 @@
 # 忽略输出目录
+*.pth
 out_dir/
+out_dir_暴力裁剪/
 
 # 忽略 VSCode 配置文件夹
 .vscode/
