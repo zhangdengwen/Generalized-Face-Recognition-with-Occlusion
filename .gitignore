@@ -1,0 +1,13 @@
+# 忽略输出目录
+out_dir/
+
+# 忽略 VSCode 配置文件夹
+.vscode/
+
+# 忽略 Python 缓存文件
+__pycache__/
+*.pyc
+
+# 忽略虚拟环境目录
+.env/
+venv/
