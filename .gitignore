@@ -6,6 +6,8 @@ out_dir_原论文/
 out_dir_crop/
 out_dir_supcon_withlabel/
 pretrained_models/
+test_data/
+data/
 # 忽略 VSCode 配置文件夹
 .vscode/
 

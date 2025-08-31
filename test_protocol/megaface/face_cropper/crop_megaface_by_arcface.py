@@ -37,8 +37,8 @@ def crop_facescrub(facescrub_root, facescrub_lms_file, target_folder):
         line = facescrub_lms_file_buf.readline().strip()
 
 if __name__ == '__main__':
-    facescrub_root = '/export2/wangjun492/face_database/public_data/meta_data/test_data/megaface/FlickrFinal2'
+    facescrub_root = '/home/srp/face_recognition/test_data/MeGlass_120x120_reid'
     facescrub_lms_file = '/export/home/wangjun492/wj_armory/faceX-Zoo/dataset/face_evaluation/megaface/megaface_face_info.txt'
-    target_folder = '/export2/wangjun492/face_database/public_data/meta_data/test_data/megaface/megaface_crop'
+    target_folder = '/home/srp/face_recognition/test_data/megaface_crop'
 
     crop_facescrub(facescrub_root, facescrub_lms_file, target_folder)

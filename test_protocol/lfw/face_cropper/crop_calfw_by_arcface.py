@@ -9,8 +9,10 @@ import sys
 import math
 import multiprocessing
 import cv2
-sys.path.append('/export/home/wangjun492/wj_armory/faceX-Zoo/face_sdk')
-from core.image_cropper.arcface_face_recognition.FaceRecImageCropper import FaceRecImageCropper
+sys.path.append('/home/srp/face_recognition')
+
+
+from face_sdk.core.image_cropper.arcface_cropper.FaceRecImageCropper import FaceRecImageCropper
 
 def crop_calfw(calfw_root, calfw_lmk_root, target_folder):
     face_cropper = FaceRecImageCropper()
@@ -37,7 +39,7 @@ def crop_calfw(calfw_root, calfw_lmk_root, target_folder):
             cv2.imwrite(target_path, cur_cropped_image)
         
 if __name__ == '__main__':
-    calfw_root = '/export/home/wangjun492/wj_armory/faceX-Zoo/face_recognition/face_evaluation/calfw/data/images&landmarks/images&landmarks/images'
-    calfw_lmk_root = '/export/home/wangjun492/wj_armory/faceX-Zoo/face_recognition/face_evaluation/calfw/data/images&landmarks/images&landmarks/CA_landmarks'
-    target_folder = '/export/home/wangjun492/wj_armory/faceX-Zoo/face_recognition/face_evaluation/calfw/calfw_crop'
+    calfw_root = '/home/srp/face_recognition/test_data/CALFW/CALFW_reid_random_sunglasses4'
+    calfw_lmk_root = '/home/srp/face_recognition/test_data/calfw/calfw/images&landmarks/images&landmarks/CA_landmarks'
+    target_folder = '/home/srp/face_recognition/test_data/calfw_crop'
     crop_calfw(calfw_root, calfw_lmk_root, target_folder)

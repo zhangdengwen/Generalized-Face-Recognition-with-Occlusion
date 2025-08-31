@@ -147,7 +147,7 @@ if __name__ == '__main__':
         cropped_face_folder = data_conf['cropped_face_folder']
         image_list_file_path = data_conf['image_list_file_path']
 
-    clip_model, preprocess = clip.load("/mnt/diskB/lyx/clip_model/RN50x16.pt", device=torch.device(args.device))
+    clip_model, preprocess = clip.load("RN50x16", device=torch.device(args.device))
     clip_model.eval()
     text = clip.tokenize(["A human face","A human face in a mask","A human face with glasses","A human face with sunglasses"]).to(args.device)# 
     args.category_mum = text.shape[0]#
@@ -161,6 +161,10 @@ if __name__ == '__main__':
     #model def
     backbone_factory = BackboneFactory(args.backbone_type, args.backbone_conf_file)
     model_loader = iresnet100(num_features=args.embedding_size)# ModelLoader(backbone_factory)
+    model_loader = torch.nn.DataParallel(model_loader)  # 用多卡包装
+    model_loader.load_state_dict(torch.load(args.model_path,map_location='cpu')['state_dict'])
+    model = model_loader.cuda(args.device)
+
     feature_extractor = CommonExtractor(args.device)
     lfw_evaluator = LFWEvaluator(data_loader, pairs_parser_factory, feature_extractor)
 

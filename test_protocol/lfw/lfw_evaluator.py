@@ -36,37 +36,25 @@ class LFWEvaluator(object):
         return mean, std
 
     def test_one_model(self, test_pair_list, image_name2feature, is_normalize = True):
-        """Get the accuracy of a model.
-        
-        Args:
-            test_pair_list(list): the pair list given by PairsParser. 
-            image_name2feature(dict): the map of image name and it's feature.
-            is_normalize(bool): wether the feature is normalized.
-
-        Returns:
-            mean: estimated mean accuracy.
-            std: standard error of the mean.
-        """
         subsets_score_list = np.zeros((10, 600), dtype = np.float32)
         subsets_label_list = np.zeros((10, 600), dtype = np.int8)
+        valid_counts = np.zeros(10, dtype=int)  # 统计每子集有效对数
+
         for index, cur_pair in enumerate(test_pair_list):
             cur_subset = index // 600
             cur_id = index % 600
-            image_name1 = cur_pair[0]
-            image_name2 = cur_pair[1]
+            image_name1, image_name2, label = cur_pair
             if(image_name1 not in image_name2feature or  image_name2 not in image_name2feature):
                 continue
-            label = cur_pair[2]
             subsets_label_list[cur_subset][cur_id] = label
-            
 
             feat1 = image_name2feature[image_name1]
             feat2 = image_name2feature[image_name2]
             if not is_normalize:
                 feat1 = feat1 / np.linalg.norm(feat1)
                 feat2 = feat2 / np.linalg.norm(feat2)
-            cur_score = np.dot(feat1, feat2)
-            subsets_score_list[cur_subset][cur_id] = cur_score
+            subsets_score_list[cur_subset][cur_id] = np.dot(feat1, feat2)
+            valid_counts[cur_subset] += 1
 
         subset_train = np.array([True] * 10)
         accu_list = []
@@ -77,43 +65,48 @@ class LFWEvaluator(object):
             train_score_list = subsets_score_list[subset_train].flatten()
             train_label_list = subsets_label_list[subset_train].flatten()
             subset_train[subset_idx] = True
+
             best_thres = self.getThreshold(train_score_list, train_label_list)
+
             positive_score_list = test_score_list[test_label_list == 1]
             negtive_score_list = test_score_list[test_label_list == 0]
+
             true_pos_pairs = np.sum(positive_score_list > best_thres)
             true_neg_pairs = np.sum(negtive_score_list < best_thres)
-            accu_list.append((true_pos_pairs + true_neg_pairs) / 600)
+
+            valid_pair_num = np.sum(test_label_list == 1) + np.sum(test_label_list == 0)
+            if valid_pair_num == 0:
+                accu_list.append(0)
+            else:
+                accu_list.append((true_pos_pairs + true_neg_pairs) / valid_pair_num)
+
         mean = np.mean(accu_list)
-        std = np.std(accu_list, ddof=1) / np.sqrt(10) #ddof=1, division 9.
+        std = np.std(accu_list, ddof=1) / np.sqrt(10)
         return mean, std
 
     def getThreshold(self, score_list, label_list, num_thresholds=1000):
-        """Get the best threshold by train_score_list and train_label_list.
-        Args:
-            score_list(ndarray): the score list of all pairs.
-            label_list(ndarray): the label list of all pairs.
-            num_thresholds(int): the number of threshold that used to compute roc.
-        Returns:
-            best_thres(float): the best threshold that computed by train set.
-        """
         pos_score_list = score_list[label_list == 1]
         neg_score_list = score_list[label_list == 0]
         pos_pair_nums = pos_score_list.size
         neg_pair_nums = neg_score_list.size
-        score_max = np.max(score_list)
-        score_min = np.min(score_list)
+
+        score_max = np.max(score_list) if score_list.size > 0 else 1
+        score_min = np.min(score_list) if score_list.size > 0 else 0
         score_span = score_max - score_min
         step = score_span / num_thresholds
         threshold_list = score_min +  step * np.array(range(1, num_thresholds + 1)) 
+
         fpr_list = []
         tpr_list = []
         for threshold in threshold_list:
-            fpr = np.sum(neg_score_list > threshold) / neg_pair_nums
-            tpr = np.sum(pos_score_list > threshold) /pos_pair_nums
+            fpr = np.sum(neg_score_list > threshold) / neg_pair_nums if neg_pair_nums > 0 else 0
+            tpr = np.sum(pos_score_list > threshold) / pos_pair_nums if pos_pair_nums > 0 else 0
             fpr_list.append(fpr)
             tpr_list.append(tpr)
+
         fpr = np.array(fpr_list)
         tpr = np.array(tpr_list)
         best_index = np.argmax(tpr-fpr)
         best_thres = threshold_list[best_index]
         return  best_thres
+

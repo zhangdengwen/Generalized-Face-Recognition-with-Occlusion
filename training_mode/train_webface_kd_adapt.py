@@ -8,7 +8,7 @@ import sys
 import shutil
 import argparse
 import logging as logger
-
+import torch.cuda.amp as amp
 import torch
 from torch import optim
 from torch.utils.data import DataLoader
@@ -256,7 +256,7 @@ def train(conf):
     data
     '''
     data_loader = DataLoader(ImageDataset_KD_glasses_sunglasses(conf.data_root, conf.train_file,transform=transform,preprocess=preprocess), 
-                               conf.batch_size, True, num_workers = 4)
+                               conf.batch_size, True, num_workers = 4,pin_memory=True)
     '''
     teacher
     '''
@@ -276,7 +276,9 @@ def train(conf):
         except (FileNotFoundError, KeyError, IndexError, RuntimeError):
             logger.info("load student backbone resume init, failed!")
     backbone_teacher.eval()
-    backbone_teacher = backbone_teacher.cuda(conf.device)# torch.nn.DataParallel(backbone_teacher).cuda(conf.device)
+    # backbone_teacher = backbone_teacher.cuda(conf.device)# torch.nn.DataParallel(backbone_teacher).cuda(conf.device)
+    backbone_teacher = torch.nn.DataParallel(backbone_teacher).cuda(conf.device)# torch.nn.DataParallel(backbone_teacher).cuda(conf.device)
+
     # backbone_student.train()
     # backbone_factory = BackboneFactory(conf.backbone_type, conf.backbone_conf_file)    
     header = HeadFactory(conf.head_type, conf.head_conf_file).get_head()
@@ -306,7 +308,9 @@ def train(conf):
     lr_schedule_adapt = optim.lr_scheduler.MultiStepLR(
         adapt_optimizer, milestones = conf.milestones, gamma = 0.1)
 
-    model = backbone_student.cuda(conf.device)# torch.nn.DataParallel(backbone_student).cuda(conf.device)
+    #model = backbone_student.cuda(conf.device)# torch.nn.DataParallel(backbone_student).cuda(conf.device)
+    model = torch.nn.DataParallel(backbone_student).cuda(conf.device)# torch.nn.DataParallel(backbone_student).cuda(conf.device)
+
     parameters = [p for p in backbone_student.parameters() if p.requires_grad]
     model_optimizer = optim.SGD(parameters, lr = conf.lr, 
                           momentum = conf.momentum, weight_decay = 1e-4)
@@ -319,7 +323,9 @@ def train(conf):
     # This function computes the average loss over an epoch, that is, the average of the loss over each sample.
     model.train()
 
-    header=header.cuda(conf.device)# torch.nn.DataParallel(header).cuda(conf.device)
+    # header=header.cuda(conf.device)# torch.nn.DataParallel(header).cuda(conf.device)
+    header=torch.nn.DataParallel(header).cuda(conf.device)# torch.nn.DataParallel(header).cuda(conf.device)
+
     parameters = [p for p in header.parameters() if p.requires_grad]
     header_optimizer = optim.SGD(parameters, lr = conf.lr, 
                           momentum = conf.momentum, weight_decay = 1e-4)

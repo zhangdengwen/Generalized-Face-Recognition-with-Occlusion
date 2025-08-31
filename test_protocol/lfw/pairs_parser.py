@@ -92,58 +92,54 @@ class RFW_PairsParser(PairsParser):
 class CPLFW_PairsParser(PairsParser):
     """The pairs parser for cplfw.
     """
-    def parse_pairs(self):        
-        pair_list = []
-        pairs_file_buf = open(self.pairs_file)
-        line1 = pairs_file_buf.readline().strip()
-        while line1:
-            line2 = pairs_file_buf.readline().strip()
-            image_name1 = line1.split(' ')[0]
-            image_name2 = line2.split(' ')[0]
-            label = line1.split(' ')[1]
-            pair_list.append((image_name1, image_name2, int(label)))
-            line1 = pairs_file_buf.readline().strip()
-        assert(len(pair_list) == 6000)
-        test_pair_list = []
-        positive_start = 0 # 0-2999
-        negtive_start = 3000 # 3000 - 5999
-        for set_idx in range(10):
-            positive_index = positive_start + 300 * set_idx
-            negtive_index = negtive_start + 300 * set_idx
-            cur_positive_pair_list = pair_list[positive_index : positive_index + 300]
-            cur_negtive_pair_list = pair_list[negtive_index : negtive_index + 300]
-            test_pair_list.extend(cur_positive_pair_list)
-            test_pair_list.extend(cur_negtive_pair_list)
-        return test_pair_list
-
-class CALFW_PairsParser(PairsParser):
-    """The pairs parser for calfw.
-    """
     def parse_pairs(self):
         pair_list = []
-        pairs_file_buf = open(self.pairs_file)
-        line1 = pairs_file_buf.readline().strip()
-        while line1:
-            line2 = pairs_file_buf.readline().strip()
-            image_name1 = line1.split(' ')[0]
-            image_name2 = line2.split(' ')[0]
-            label = int(line1.split(' ')[1])
-            if label != 0:
-                label = 1
-            pair_list.append((image_name1, image_name2, label))
-            line1 = pairs_file_buf.readline().strip()
-        assert(len(pair_list) == 6000)
-        test_pair_list = []
-        positive_start = 0 # 0-2999
-        negtive_start = 3000 # 3000 - 5999
-        for set_idx in range(10):
-            positive_index = positive_start + 300 * set_idx
-            negtive_index = negtive_start + 300 * set_idx
-            cur_positive_pair_list = pair_list[positive_index : positive_index + 300]
-            cur_negtive_pair_list = pair_list[negtive_index : negtive_index + 300]
-            test_pair_list.extend(cur_positive_pair_list)
-            test_pair_list.extend(cur_negtive_pair_list)
-        return test_pair_list
+        with open(self.pairs_file) as pairs_file_buf:
+            line = pairs_file_buf.readline()  # 跳过文件头部的 "10 300"
+            line = pairs_file_buf.readline().strip()
+            
+            while line:
+                line_strs = line.split('\t')
+                
+                if len(line_strs) == 3:
+                    # 这是正向配对 (Positive pair)
+                    person_name = line_strs[0]
+                    image_index1 = line_strs[1]
+                    image_index2 = line_strs[2]
+                    
+                    image_name1 = person_name + '/' + person_name + '_' + image_index1.zfill(4) + '.jpg'
+                    image_name2 = person_name + '/' + person_name + '_' + image_index2.zfill(4) + '.jpg'
+                    label = 1
+                    
+                    pair_list.append((image_name1, image_name2, label))
+
+                elif len(line_strs) == 4:
+                    # 这是负向配对 (Negative pair)
+                    person_name1 = line_strs[0]
+                    image_index1 = line_strs[1]
+                    person_name2 = line_strs[2]
+                    image_index2 = line_strs[3]
+                    
+                    image_name1 = person_name1 + '/' + person_name1 + '_' + image_index1.zfill(4) + '.jpg'
+                    image_name2 = person_name2 + '/' + person_name2 + '_' + image_index2.zfill(4) + '.jpg'
+                    label = 0
+                    
+                    pair_list.append((image_name1, image_name2, label))
+                
+                else:
+                    raise Exception(f"Line format error: {line}")
+                
+                line = pairs_file_buf.readline().strip()
+        
+        # 调试输出，检查正向和负向配对数量
+        positive_count = sum(1 for _, _, label in pair_list if label == 1)
+        negative_count = sum(1 for _, _, label in pair_list if label == 0)
+        print(f"解析完成。总配对数: {len(pair_list)}, 正向配对数: {positive_count}, 负向配对数: {negative_count}")
+        
+        # CPLFW 数据集总共有 6000 对配对 (3000 正向 + 3000 负向)
+        assert len(pair_list) == 6000, f"Expected 6000 pairs, but found {len(pair_list)}"
+        
+        return pair_list
 
 class AgeDB_PairsParser(PairsParser):
     """The pairs parser for agedb.

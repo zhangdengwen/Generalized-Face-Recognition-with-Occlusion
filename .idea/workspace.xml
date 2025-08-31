@@ -1,29 +1,522 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="f7c9e7f5-009a-4c57-a8f2-399ee8f95bb9" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/amfr.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/backbones/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/backbones/activation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/backbones/iresnet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/backbones/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/config/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/eval/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/eval/evaluation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/eval/verification.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/images/margins.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/requirement.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/run.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/utils/countFLOPS.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/utils/dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/utils/losses.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/utils/modelFLOPS.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/utils/utils_amp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/utils/utils_callbacks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ElasticFace-main/utils/utils_logging.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/convert_weights.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/datasets/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/datasets/bases.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/datasets/image_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/datasets/make_dataloader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/datasets/preprocessing.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/datasets/sampler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/images/framework.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/images/test1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/inference.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/losses/SP_KD_Loss.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/losses/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/losses/softLoss.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/models/make_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/models/make_target_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/models/resnet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/models/resnet_ibn_a.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/models/resnet_ibn_multibranch.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/models/resnet_multibranch.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/crop_align.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/crop_msra.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/face_alignmenet/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/face_alignmenet/core/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/face_alignmenet/core/coord_conv.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/face_alignmenet/core/dataloader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/face_alignmenet/core/evaler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/face_alignmenet/core/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/face_alignmenet/dataloader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/face_alignmenet/get_landmark.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/face_alignmenet/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/face_alignmenet/utils/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/make_lmdb.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/mtcnn/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/mtcnn/detect_face.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/mtcnn/mtcnn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/mtcnn/onet.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/mtcnn/pnet.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/mtcnn/rnet.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/preprocess/template.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/pretrain/backbones/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/pretrain/backbones/resnet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/pretrain/backbones/resnet_ibn_a.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/pretrain/gen_train_file.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/pretrain/loss_def.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/pretrain/train_mv_softmax.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/pretrain/train_res18.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/pretrain/train_res50_ibn.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/pretrain/utils/AverageMeter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/pretrain/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/pretrain/utils/dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/pretrain/utils/make_transform.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/train.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/train_ddp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/train_ddp.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/utils/easylog.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DMUE/utils/ramp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/DUM/Load_OULUNPUcrop_train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/DUM/Load_OULUNPUcrop_valtest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/DUM/checkpoint/CDCN_U_P1.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/DUM/make_dataset/crop_dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/DUM/models/CDCNs_u.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/DUM/models/ResNet_u.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/DUM/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/DUM/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/DUM/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/data/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/data/bbox.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/data/extract_frame.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/data/generation_dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/data/make_train_list.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/data/recognition_dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/generated.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/misc/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/misc/util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/networks/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/networks/generator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/networks/light_cnn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/oulu_images/protocols/Protocol_1/Dev.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/oulu_images/protocols/Protocol_1/Test.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/oulu_images/protocols/Protocol_1/Train.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/oulu_images_crop/protocols/Protocol_1/Dev.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/oulu_images_crop/protocols/Protocol_1/Test.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/oulu_images_crop/protocols/Protocol_1/Train_g.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/train_generator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/train_generator.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/DSDG/train_list/train_list_oulu_p1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/HSST/HSST_Prototype.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/HSST/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/HSST/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/HSST/train.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/HSST/train_dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_body_attribute/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_body_attribute/bagpack/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_body_attribute/body/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_body_attribute/call/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_body_attribute/child/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_body_attribute/downbody/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_body_attribute/hair/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_body_attribute/hand/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_body_attribute/hat/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_body_attribute/orient/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_body_attribute/scarf/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_body_attribute/shoe/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_body_attribute/umbrella/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_body_attribute/upbody/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/backbone/MobileFaceNets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/backbone/ResNets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/backbone/backbone_def.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/loss/fitnet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/loss/fsp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/loss/ft.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/loss/loss_def.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/loss/pkt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/loss/snn_mimic.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/loss/soft_target.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/data_conf.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/extract_feature.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/extract_feature.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/ijbc/face_cropper/crop_ijbc_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/ijbc/ijbc_evaluator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/lfw/face_cropper/crop_agedb_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/lfw/face_cropper/crop_calfw_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/lfw/face_cropper/crop_cplfw_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/lfw/face_cropper/crop_lfw_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/lfw/face_cropper/crop_rfw_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/lfw/lfw_evaluator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/lfw/pairs_parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/megaface/face_cropper/crop_eye.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/megaface/face_cropper/crop_facescrub_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/megaface/face_cropper/crop_megaface_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/megaface/megaface_evaluator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/remove_noises.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/remove_noises.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/test_ijbc.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/test_ijbc.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/test_lfw.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/test_lfw.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/test_megaface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/test_megaface.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/utils/extractor/feature_extract_save.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/utils/extractor/feature_extractor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/utils/feat_concat.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/utils/model_loader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/test_protocol/utils/pair_analysis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/training_mode/cls_training/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/training_mode/cls_training/train.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/training_mode/head_conf.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/training_mode/kd_training/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/training_mode/kd_training/train.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/training_mode/kd_training/train_ft.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/training_mode/loss_conf.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/training_mode/student_backbone_conf.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/training_mode/teacher_backbone_conf.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/KDF/utils/net_util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_lightning/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/images/FMA-3D.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/images/mask-sample.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/mask-data/0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/mask-data/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/mask-data/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/mask-data/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/mask-data/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/mask-data/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/mask-data/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/mask-data/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/test-data/test1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/test-data/test1_landmark.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/uv-data/.ipynb_checkpoints/face_ind-checkpoint.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/uv-data/.ipynb_checkpoints/triangles-checkpoint.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/uv-data/.ipynb_checkpoints/uv_face-checkpoint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/uv-data/.ipynb_checkpoints/uv_face_eyes-checkpoint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/uv-data/.ipynb_checkpoints/uv_face_mask-checkpoint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/uv-data/.ipynb_checkpoints/uv_kpt_ind-checkpoint.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/uv-data/.ipynb_checkpoints/uv_kpt_mask-checkpoint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/uv-data/.ipynb_checkpoints/uv_weight_mask-checkpoint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/uv-data/face_ind.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/uv-data/triangles.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/Data/uv-data/uv_face_mask.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/add_mask_all.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/add_mask_one.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/face_masker.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/model/prnet.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/model/prnet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/utils/cython/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/utils/cython/render.pyx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/utils/cython/setup.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/utils/read_info.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/FMA-3D/utils/render.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/face_mask_adding/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/model_convertor/convert_to_onnx/convert.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/model_convertor/convert_to_onnx/model_convert.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/model_convertor/convert_to_onnx/test_images/11-FaceId-0_align.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/model_convertor/convert_to_onnx/test_images/12-FaceId-0_align.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/model_convertor/convert_to_sdk/model_convert.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addition_module/model_convertor/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/AttentionNets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/EfficientNets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/GhostNet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/HRNet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/LightCNN.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/MobileFaceNets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/ReXNets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/RepVGG.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/ResNets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/Swin_Transformer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/TF_NAS.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/backbone_def.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/iresnet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/net_sia.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/resnest/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/resnest/ablation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/resnest/resnest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/resnest/resnet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backbone/resnest/splat.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clip/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clip/bpe_simple_vocab_16e6.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clip/bpe_simple_vocab_16e6.txt.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clip/clip.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clip/model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clip/simple_tokenizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/files/MS-Celeb-1M-v1c-r-shallow_train_list.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/files/MS-Celeb-1M-v1c-r_id_list.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/files/MS-Celeb-1M-v1c-r_train_list.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/files/facescrub2template_name.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/files/facescrub_face_info.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/files/lfw_face_info.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/arch.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/face_parsing.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/sample_mask.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/images/sample_non_mask.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_processor/glass_img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_processor/glass_img3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_processor/imread.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_processor/mask.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_processor/mask_data_generation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_processor/mask_img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_processor/sunglass_img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_processor/sunglass_img2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_processor/test_dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_processor/train_dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/README.MD" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/api_usage/face_alignment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/api_usage/face_crop.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/api_usage/face_detect.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/api_usage/face_feature.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/api_usage/face_parsing.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/api_usage/face_pipline.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/api_usage/temp/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/api_usage/test_images/test1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/api_usage/test_images/test1_cropped.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/api_usage/test_images/test1_detect_res.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/api_usage/test_images/test1_landmark_res0.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/api_usage/test_images/test2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/api_usage/test_images/test3_mask.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/api_usage/test_images/test4_mask.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/config/logging.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/config/model_conf.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/core/image_cropper/BaseImageCropper.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/core/image_cropper/arcface_cropper/FaceRecImageCropper.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/core/model_handler/BaseModelHandler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/core/model_handler/face_alignment/FaceAlignModelHandler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/core/model_handler/face_detection/FaceDetModelHandler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/core/model_handler/face_parsing/FaceParsingModelHandler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/core/model_handler/face_recognition/FaceRecModelHandler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/core/model_loader/BaseModelLoader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/core/model_loader/face_alignment/FaceAlignModelLoader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/core/model_loader/face_detection/FaceDetModelLoader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/core/model_loader/face_parsing/FaceParsingModelLoader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/core/model_loader/face_recognition/FaceRecModelLoader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/logs/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/logs/sdk.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/face_alignment/face_alignment_1.0/face_landmark_pfld.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/face_alignment/face_alignment_1.0/model_meta.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/face_alignment/face_alignment_2.0/face_landmark_pfld.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/face_alignment/face_alignment_2.0/model_meta.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/face_detection/face_detection_1.0/face_detection_retina.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/face_detection/face_detection_1.0/model_meta.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/face_detection/face_detection_2.0/face_detection_retina.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/face_detection/face_detection_2.0/model_meta.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/face_parsing/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/face_parsing/face_parsing_1.0/model_meta.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/face_recognition/face_recognition_1.0/face_recognition_mv.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/face_recognition/face_recognition_1.0/model_meta.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/face_recognition/face_recognition_2.0/face_recognition_mv.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/face_recognition/face_recognition_2.0/model_meta.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/network_def/mobilefacenet_def.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/network_def/mobilev3_pfld.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/models/network_def/retinaface_def.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/utils/BuzException.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/utils/draw.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/utils/lms_trans.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/utils/show.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/face_sdk/utils/transform.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/AM_Softmax.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/AdaCos.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/AdaM_Softmax.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/ArcFace.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/ArcNegFace.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/CircleLoss.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/CurricularFace.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/ElasticArcFace.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/MV_Softmax.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/MagFace.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/NPCFace.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/SST_Prototype.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head/head_def.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mv-hrnet_test/events.out.tfevents.1752946131.Winston" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out_dir/Epoch_0_batch_5999.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out_dir/Epoch_0_batch_5999_adapt.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out_dir/Epoch_0_batch_5999_header.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out_dir/Epoch_0_batch_8999.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out_dir/Epoch_0_batch_8999_adapt.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out_dir/Epoch_0_batch_8999_header.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reference/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_data/CALFW_pairs.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_data/CALFW_train_list.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_data/CPLFW_pairs.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_data/CPLFW_train_list.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_data/calfw_converted_pairs.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_data/glass_train_list.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_data/glasses_pairs.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/backbone_conf.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/data_conf.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/extract_feature.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/extract_feature.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/ijbc/face_cropper/crop_ijbc_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/ijbc/ijbc_evaluator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/lfw/face_cropper/crop_agedb_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/lfw/face_cropper/crop_calfw_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/lfw/face_cropper/crop_cplfw_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/lfw/face_cropper/crop_lfw_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/lfw/face_cropper/crop_rfw_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/lfw/lfw_evaluator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/lfw/pairs_parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/megaface/face_cropper/crop_eye.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/megaface/face_cropper/crop_facescrub_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/megaface/face_cropper/crop_megaface_by_arcface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/megaface/megaface_evaluator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/remove_noises.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/remove_noises.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/sample_pairs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_glass.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_ijbc.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_ijbc.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_PDSN.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_PDSN.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_adapt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_adapt.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_adapt2.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_case.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_case.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_hsst.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_kd.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_mask.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_mask.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_sphere.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_sphere.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_srt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_srt.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_lfw_wo_adapt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_megaface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/test_megaface.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/utils/extractor/feature_extract_save.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/utils/extractor/feature_extractor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/utils/feat_concat.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/utils/model_loader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/utils/online_val.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_protocol/utils/pair_analysis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/017_N95.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/backbone_conf.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/conventional_training/glass_img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/conventional_training/glass_img3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/conventional_training/mask_img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/conventional_training/sunglass_img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/conventional_training/sunglass_img2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/conventional_training/teacher_model/295672backbone.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/conventional_training/teacher_model/training.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/conventional_training/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/conventional_training/train.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/conventional_training/train_webface_kd_adapt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/distributed_training/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/distributed_training/train.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/head_conf.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/pretrained/ElasticFace-Arc.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/semi-siamese_training/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/semi-siamese_training/train.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/shallow_list.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/siamese-triplet_training/losses.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/siamese-triplet_training/pair_selector.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/siamese-triplet_training/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/siamese-triplet_training/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/siamese-triplet_training/train.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/swin_training/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/swin_training/lr_scheduler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/swin_training/optimizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/swin_training/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/swin_training/train.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/train_list.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/train_webface_kd_adapt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/train_webface_sphere.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/webface_crop.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/training_mode/webface_train_list.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/AverageMeter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/compute_cost.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/gen_train_file.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="300OYVYCl2bYACBd38MqTfEzwB8" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Python 测试.Python 测试 (test_imread.py 内).executor&quot;: &quot;Run&quot;,
+    &quot;Python.1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.imread.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Shell Script.train.sh.executor&quot;: &quot;Run&quot;,
+    &quot;ToolWindow运行.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/pythonproject/amfr/training_mode/conventional_training&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\pythonproject\amfr\training_mode\conventional_training" />
+      <recent name="D:\pythonproject\amfr\data_processor" />
+      <recent name="D:\pythonproject\amfr\training_mode\conventional_training\teacher_model" />
+      <recent name="D:\pythonproject\amfr\data" />
+      <recent name="D:\pythonproject\amfr\clip" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="amfr" />
@@ -66,15 +559,7 @@
     </task>
     <servers />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

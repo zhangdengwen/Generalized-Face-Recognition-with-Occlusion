@@ -9,9 +9,11 @@ import math
 import multiprocessing
 import cv2
 import sys
-sys.path.append('/export/home/wangjun492/wj_armory/faceX-Zoo/face_sdk')
-from core.image_cropper.arcface_cropper.FaceRecImageCropper import FaceRecImageCropper
-from utils.lms_trans import lms106_2_lms25
+sys.path.append('/home/srp/face_recognition')
+
+
+from face_sdk.core.image_cropper.arcface_cropper.FaceRecImageCropper import FaceRecImageCropper
+from face_sdk.utils.lms_trans import lms106_2_lms5, lms25_2_lms5
 
 def crop_facescrub(facescrub_root, facescrub_lms_file, target_folder):
     face_cropper = FaceRecImageCropper()
@@ -37,8 +39,8 @@ def crop_facescrub(facescrub_root, facescrub_lms_file, target_folder):
         line = facescrub_lms_file_buf.readline().strip()
 
 if __name__ == '__main__':
-    facescrub_root = '/root/lyx/FaceX-Zoo-main/test_data/lfw'
-    facescrub_lms_file = '/root/lyx/FaceX-Zoo-main/data/files/lfw_face_info.txt'
-    target_folder = '/root/lyx/FaceX-Zoo-main/test_data/lfw_crop'
+    facescrub_root = '/home/srp/face_recognition/test_data/lfw_mask_new/lfw_mask_new/crop_mask_img'
+    facescrub_lms_file = '/home/srp/face_recognition/data/files/lfw_face_info.txt'
+    target_folder = '/home/srp/face_recognition/test_data/lfw_crop'
 
     crop_facescrub(facescrub_root, facescrub_lms_file, target_folder)

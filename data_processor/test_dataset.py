@@ -40,7 +40,21 @@ class CommonTestDataset(Dataset):
         return len(self.image_list)
     def __getitem__(self, index):
         short_image_path = self.image_list[index]
+        short_image_path = (short_image_path
+                        .replace('#U00e1', 'á')
+                        .replace('#U0107', 'ć')
+                        .replace('#U0161', 'š')
+                        .replace('#U010d', 'č')
+                        .replace('#U00f6', 'ö')
+                        .replace('#U00fc', 'ü')
+                        .replace('#U00e9', 'é'))  
         image_path = os.path.join(self.image_root, short_image_path)
+        if not os.path.exists(image_path):
+            filename_only = os.path.basename(short_image_path)
+            image_path = os.path.join(self.image_root, filename_only)
+            if not os.path.exists(image_path):
+                raise FileNotFoundError(f"Image not found: {short_image_path} or {filename_only}")
+
         image = cv2.imdecode(np.fromfile(image_path, dtype=np.uint8), cv2.IMREAD_UNCHANGED)
         if(self.preprocess!=None):
             image_clip=self.preprocess(Image.fromarray(np.uint8(image)))
@@ -77,7 +91,20 @@ class CommonTestDataset96(Dataset):
         return len(self.image_list)
     def __getitem__(self, index):
         short_image_path = self.image_list[index]
+        short_image_path = (short_image_path
+                        .replace('#U00e1', 'á')
+                        .replace('#U0107', 'ć')
+                        .replace('#U0161', 'š')
+                        .replace('#U010d', 'č')
+                        .replace('#U00f6', 'ö')
+                        .replace('#U00fc', 'ü')
+                        .replace('#U00e9', 'é'))  
         image_path = os.path.join(self.image_root, short_image_path)
+        if not os.path.exists(image_path):
+            filename_only = os.path.basename(short_image_path)
+            image_path = os.path.join(self.image_root, filename_only)
+            if not os.path.exists(image_path):
+                raise FileNotFoundError(f"Image not found: {short_image_path} or {filename_only}")
         image = cv2.imdecode(np.fromfile(image_path, dtype=np.uint8), cv2.IMREAD_UNCHANGED)
         if(self.preprocess!=None):
             image_clip=self.preprocess(Image.fromarray(np.uint8(image)))

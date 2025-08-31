@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "train_webface_kd_adapt.py", line 17, in <module>
+    from tensorboardX import SummaryWriter
+  File "E:\anaconda\envs\amfr\lib\site-packages\tensorboardX\__init__.py", line 5, in <module>
+    from .torchvis import TorchVis
+  File "E:\anaconda\envs\amfr\lib\site-packages\tensorboardX\torchvis.py", line 10, in <module>
+    from .writer import SummaryWriter
+  File "E:\anaconda\envs\amfr\lib\site-packages\tensorboardX\writer.py", line 16, in <module>
+    from .comet_utils import CometLogger
+  File "E:\anaconda\envs\amfr\lib\site-packages\tensorboardX\comet_utils.py", line 5, in <module>
+    from google.protobuf.json_format import MessageToJson
+ModuleNotFoundError: No module named 'google'

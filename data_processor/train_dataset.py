@@ -72,33 +72,187 @@ def transform(image):
     return image
 
 
-class ImageDataset(Dataset):
-    def __init__(self, data_root, train_file, crop_eye=False):
+# class ImageDataset(Dataset):
+#     def __init__(self, data_root, train_file, crop_eye=False):
+#         self.data_root = data_root
+#         self.train_list = []
+#         train_file_buf = open(train_file)
+#         line = train_file_buf.readline().strip()
+#         while line:
+#             image_path, image_label = line.split(' ')
+#             self.train_list.append((image_path, int(image_label)))
+#             line = train_file_buf.readline().strip()
+#         self.crop_eye = crop_eye
+#     def __len__(self):
+#         return len(self.train_list)
+#     def __getitem__(self, index):
+#         image_path, image_label = self.train_list[index]
+#         image_path = os.path.join(self.data_root, image_path)
+#         image = cv2.imread(image_path)
+#         if self.crop_eye:
+#             image = image[:60, :]
+#         #image = cv2.resize(image, (128, 128)) #128 * 128
+#         if random.random() > 0.5:
+#             image = cv2.flip(image, 1)
+#         if image.ndim == 2:
+#             image = image[:, :, np.newaxis]
+#         image = (image.transpose((2, 0, 1)) - 127.5) * 0.0078125
+#         image = torch.from_numpy(image.astype(np.float32))
+#         return image, image_label
+
+class ImageDataset_Crop(Dataset):
+    def __init__(self, data_root, train_file, crop_eye_or_mouth=True,transform=None, preprocess=None):
         self.data_root = data_root
         self.train_list = []
-        train_file_buf = open(train_file)
-        line = train_file_buf.readline().strip()
-        while line:
-            image_path, image_label = line.split(' ')
-            self.train_list.append((image_path, int(image_label)))
-            line = train_file_buf.readline().strip()
-        self.crop_eye = crop_eye
+        with open(train_file) as f:
+            for line in f:
+                image_path, label = line.strip().split(' ')
+                self.train_list.append((image_path, int(label)))
+        self.crop_eye_or_mouth = crop_eye_or_mouth
+        self.transform = transform       
+        self.preprocess = preprocess
+
     def __len__(self):
         return len(self.train_list)
+    
+    def random_crop_eye_or_mouth(self, img, landmarks, padding=10):
+        choice = random.choice(['eye', 'mouth'])
+        if choice == 'eye':
+            points = np.array([landmarks[0], landmarks[1]])  # 两只眼睛
+        else:
+            points = np.array([landmarks[3], landmarks[4]])  # 嘴角
+
+        min_x = int(np.min(points[:, 0]).item())
+        max_x = int(np.max(points[:, 0]).item())
+        min_y = int(np.min(points[:, 1]).item())
+        max_y = int(np.max(points[:, 1]).item())
+
+        width = max_x - min_x
+        height = max_y - min_y
+
+        center_x = (min_x + max_x) // 2
+        center_y = (min_y + max_y) // 2
+
+        new_width = int(width * 0.8)
+        new_height = int(height * 0.4)
+
+        min_x = center_x - new_width // 2
+        max_x = center_x + new_width // 2
+        min_y = center_y - new_height // 2
+        max_y = center_y + new_height // 2
+
+        min_x = max(0, min_x - padding)
+        max_x = min(img.shape[1], max_x + padding)
+        min_y = max(0, min_y - padding)
+        max_y = min(img.shape[0], max_y + padding)
+
+        img[min_y:max_y, min_x:max_x] = (255, 255, 255)
+
+        return img
+
+    
     def __getitem__(self, index):
         image_path, image_label = self.train_list[index]
-        image_path = os.path.join(self.data_root, image_path)
-        image = cv2.imread(image_path)
-        if self.crop_eye:
-            image = image[:60, :]
-        #image = cv2.resize(image, (128, 128)) #128 * 128
-        if random.random() > 0.5:
-            image = cv2.flip(image, 1)
-        if image.ndim == 2:
-            image = image[:, :, np.newaxis]
-        image = (image.transpose((2, 0, 1)) - 127.5) * 0.0078125
-        image = torch.from_numpy(image.astype(np.float32))
-        return image, image_label
+        full_path = os.path.join(self.data_root, image_path)
+        image = cv2.imread(full_path)
+        if image is None:
+            raise FileNotFoundError(f"Image not found: {full_path}")
+
+        # 随机裁剪眼睛或嘴巴
+        if self.crop_eye_or_mouth:
+            image_cropped = self.random_crop_eye_or_mouth(image.copy(), landmarks)
+        else:
+            image_cropped = image.copy()
+
+
+        # resize 到 112x112 保持大小一致
+        image_cropped = cv2.resize(image_cropped, (112, 112))
+        image = cv2.resize(image, (112, 112))
+
+        # transform 和 preprocess
+        if self.transform is not None:
+            image_cropped_t = self.transform(image_cropped)
+            image_t = self.transform(image)
+        else:
+            image_cropped_t = torch.from_numpy(image_cropped)
+            image_t = torch.from_numpy(image)
+
+        if self.preprocess is not None:
+            image_cropped_clip = self.preprocess(Image.fromarray(cv2.cvtColor(image_cropped, cv2.COLOR_BGR2RGB)))
+            image_clip = self.preprocess(Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)))
+        else:
+            image_cropped_clip = None
+            image_clip = None
+
+        # cgs表示类别，这里不做遮挡，固定为0
+        cgs = 0
+
+        return image_cropped_t, image_cropped_clip, image_t, image_label, cgs
+
+
+
+
+def random_crop_eye_or_mouth1(image, crop_height=60):
+    height = image.shape[0]
+    if height < crop_height:
+        return image
+    if random.random() < 0.5:
+        return image[:crop_height, :, :]
+    else:
+        return image[-crop_height:, :, :]
+
+class ImageDataset(Dataset):
+    def __init__(self, data_root, train_file, crop_part=False, transform=None, preprocess=None):
+        self.data_root = data_root
+        self.train_list = []
+        with open(train_file, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                image_path, image_label = line.split(' ')
+                self.train_list.append((image_path, int(image_label)))
+        self.crop_part = crop_part
+        self.transform = transform
+        self.preprocess = preprocess
+
+    def __len__(self):
+        return len(self.train_list)
+
+    def __getitem__(self, index):
+        image_path, label = self.train_list[index]
+        full_path = os.path.join(self.data_root, image_path)
+        image = cv2.imread(full_path)
+        if image is None:
+            raise FileNotFoundError(f"Image not found: {full_path}")
+
+        # 这里要定义或传入landmarks，先用固定值演示
+        landmarks = np.array([[45.0, 44.0],
+                          [67.0, 44.0],
+                          [56.0, 62.0],
+                          [41.0, 78.0],
+                          [71.0, 78.0]], dtype=np.float32)
+
+        if self.crop_eye_or_mouth:
+            image_cropped = self.random_crop_eye_or_mouth(image.copy(), landmarks)
+        else:
+            image_cropped = image.copy()
+
+
+        image_cropped = cv2.resize(image_cropped, (112, 112))
+        image = cv2.resize(image, (112, 112))
+
+        # 转成Tensor，归一化到[0,1]
+        image_cropped_t = torch.from_numpy(image_cropped.transpose(2, 0, 1)).float() / 255.0
+        image_t = torch.from_numpy(image.transpose(2, 0, 1)).float() / 255.0
+
+        # 这里暂时没clip预处理，返回None
+        image_cropped_clip = None
+        image_clip = None
+
+        cgs = 0  # 你训练代码里用不到可以先固定0
+
+        return image_cropped_t, image_cropped_clip, image_t, label, cgs
 
 class ImageDataset_SST(Dataset):
     def __init__(self, data_root, train_file, exclude_id_set):
@@ -150,17 +304,27 @@ class ImageDataset_KD(Dataset):
     def __init__(self, data_root, train_file, transform=None, preprocess=None):
         self.data_root = data_root
         self.train_list = []
-        train_file_buf = open(train_file)
-        line = train_file_buf.readline().strip()
-        while line:
-            image_path, image_label = line.split(' ')
-            self.train_list.append((image_path, int(image_label)))
-            line = train_file_buf.readline().strip()
+        with open(train_file) as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                image_path, image_label = line.split(' ')
+                self.train_list.append((image_path, int(image_label)))
+
         self.transform = transform
         self.preprocess = preprocess
-        self.mask_img = cv2.imread("mask_img.png", cv2.IMREAD_UNCHANGED)
-        self.glass_img = cv2.imread("glass_img3.png", cv2.IMREAD_UNCHANGED)
-        self.sunglass_img = cv2.imread("sunglass_img2.png", cv2.IMREAD_UNCHANGED)
+
+       # 加载 mask/glasses/sunglasses 图片
+        base_path = "/home/srp/face_recognition/training_mode/conventional_training"
+        self.mask_img = cv2.imread(os.path.join(base_path, "mask_img.png"), cv2.IMREAD_UNCHANGED)
+        self.glass_img = cv2.imread(os.path.join(base_path, "glass_img3.png"), cv2.IMREAD_UNCHANGED)
+        self.sunglass_img = cv2.imread(os.path.join(base_path, "sunglass_img2.png"), cv2.IMREAD_UNCHANGED)
+
+        # 检查是否加载成功
+        assert self.mask_img is not None, "mask_img.png 加载失败，请检查路径"
+        assert self.glass_img is not None, "glass_img3.png 加载失败，请检查路径"
+        assert self.sunglass_img is not None, "sunglass_img2.png 加载失败，请检查路径"
 
     def __len__(self):
         return len(self.train_list)
@@ -414,17 +578,27 @@ class ImageDataset_KD_glasses(Dataset):
     def __init__(self, data_root, train_file, transform=None, preprocess=None):
         self.data_root = data_root
         self.train_list = []
-        train_file_buf = open(train_file)
-        line = train_file_buf.readline().strip()
-        while line:
-            image_path, image_label = line.split(' ')
-            self.train_list.append((image_path, int(image_label)))
-            line = train_file_buf.readline().strip()
+        with open(train_file) as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                image_path, image_label = line.split(' ')
+                self.train_list.append((image_path, int(image_label)))
+
         self.transform = transform
         self.preprocess = preprocess
-        self.mask_img = cv2.imread("mask_img.png", cv2.IMREAD_UNCHANGED)
-        self.glass_img = cv2.imread("glass_img3.png", cv2.IMREAD_UNCHANGED)
-        self.sunglass_img = cv2.imread("sunglass_img2.png", cv2.IMREAD_UNCHANGED)
+
+        # ✅ 加载 mask/glasses/sunglasses 图片
+        base_path = "/home/srp/face_recognition/training_mode/conventional_training"
+        self.mask_img = cv2.imread(os.path.join(base_path, "mask_img.png"), cv2.IMREAD_UNCHANGED)
+        self.glass_img = cv2.imread(os.path.join(base_path, "glass_img3.png"), cv2.IMREAD_UNCHANGED)
+        self.sunglass_img = cv2.imread(os.path.join(base_path, "sunglass_img2.png"), cv2.IMREAD_UNCHANGED)
+
+        # ✅ 检查是否加载成功
+        assert self.mask_img is not None, "❌ mask_img.png 加载失败，请检查路径"
+        assert self.glass_img is not None, "❌ glass_img3.png 加载失败，请检查路径"
+        assert self.sunglass_img is not None, "❌ sunglass_img2.png 加载失败，请检查路径"
 
     def __len__(self):
         return len(self.train_list)
@@ -610,17 +784,27 @@ class ImageDataset_KD_glasses_sunglasses(Dataset):
     def __init__(self, data_root, train_file, transform=None, preprocess=None):
         self.data_root = data_root
         self.train_list = []
-        train_file_buf = open(train_file)
-        line = train_file_buf.readline().strip()
-        while line:
-            image_path, image_label = line.split(' ')
-            self.train_list.append((image_path, int(image_label)))
-            line = train_file_buf.readline().strip()
+        with open(train_file) as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                image_path, image_label = line.split(' ')
+                self.train_list.append((image_path, int(image_label)))
+
         self.transform = transform
         self.preprocess = preprocess
-        self.mask_img = cv2.imread("mask_img.png", cv2.IMREAD_UNCHANGED)
-        self.glass_img = cv2.imread("glass_img3.png", cv2.IMREAD_UNCHANGED)
-        self.sunglass_img = cv2.imread("sunglass_img2.png", cv2.IMREAD_UNCHANGED)
+
+        # ✅ 加载 mask/glasses/sunglasses 图片
+        base_path = "/home/srp/face_recognition/training_mode/conventional_training"
+        self.mask_img = cv2.imread(os.path.join(base_path, "mask_img.png"), cv2.IMREAD_UNCHANGED)
+        self.glass_img = cv2.imread(os.path.join(base_path, "glass_img3.png"), cv2.IMREAD_UNCHANGED)
+        self.sunglass_img = cv2.imread(os.path.join(base_path, "sunglass_img2.png"), cv2.IMREAD_UNCHANGED)
+
+        # ✅ 检查是否加载成功
+        assert self.mask_img is not None, "❌ mask_img.png 加载失败，请检查路径"
+        assert self.glass_img is not None, "❌ glass_img3.png 加载失败，请检查路径"
+        assert self.sunglass_img is not None, "❌ sunglass_img2.png 加载失败，请检查路径"
 
     def __len__(self):
         return len(self.train_list)
@@ -805,7 +989,7 @@ class ImageDataset_KD_glasses_sunglasses(Dataset):
                          None,
                          cv2.INTER_LINEAR,
                          cv2.BORDER_CONSTANT)
- 
+
         # overlay the image with the fitting mask
         alpha_mask = transformed_mask[:, :, 3] / 255
         alpha_image = np.abs(1 - alpha_mask)
@@ -959,21 +1143,30 @@ class ImageDataset_HSST(Dataset):
 
         return nir_image, vis_image, cur_id
 class ImageDataset_KD_glasses_sunglasses_one(Dataset):
-    def __init__(self, data_root, train_file,mask_type='mask', transform=None, preprocess=None):
+    def __init__(self, data_root, train_file, transform=None, preprocess=None):
         self.data_root = data_root
         self.train_list = []
-        train_file_buf = open(train_file)
-        line = train_file_buf.readline().strip()
-        while line:
-            image_path, image_label = line.split(' ')
-            self.train_list.append((image_path, int(image_label)))
-            line = train_file_buf.readline().strip()
+        with open(train_file) as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                image_path, image_label = line.split(' ')
+                self.train_list.append((image_path, int(image_label)))
+
         self.transform = transform
         self.preprocess = preprocess
-        self.mask_type = mask_type
-        self.mask_img = cv2.imread("mask_img.png", cv2.IMREAD_UNCHANGED)
-        self.glass_img = cv2.imread("glass_img3.png", cv2.IMREAD_UNCHANGED)
-        self.sunglass_img = cv2.imread("sunglass_img2.png", cv2.IMREAD_UNCHANGED)
+
+        # ✅ 加载 mask/glasses/sunglasses 图片
+        base_path = "/home/srp/face_recognition/training_mode/conventional_training"
+        self.mask_img = cv2.imread(os.path.join(base_path, "mask_img.png"), cv2.IMREAD_UNCHANGED)
+        self.glass_img = cv2.imread(os.path.join(base_path, "glass_img3.png"), cv2.IMREAD_UNCHANGED)
+        self.sunglass_img = cv2.imread(os.path.join(base_path, "sunglass_img2.png"), cv2.IMREAD_UNCHANGED)
+
+        # ✅ 检查是否加载成功
+        assert self.mask_img is not None, "❌ mask_img.png 加载失败，请检查路径"
+        assert self.glass_img is not None, "❌ glass_img3.png 加载失败，请检查路径"
+        assert self.sunglass_img is not None, "❌ sunglass_img2.png 加载失败，请检查路径"
 
     def __len__(self):
         return len(self.train_list)
@@ -1267,18 +1460,27 @@ class ImageDataset_KD_glasses_sunglasses_save(Dataset):
     def __init__(self, data_root, train_file, transform=None, preprocess=None):
         self.data_root = data_root
         self.train_list = []
-        train_file_buf = open(train_file)
-        line = train_file_buf.readline().strip()
-        while line:
-            image_path, image_label = line.split(' ')
-            self.train_list.append((image_path, int(image_label)))
-            line = train_file_buf.readline().strip()
+        with open(train_file) as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                image_path, image_label = line.split(' ')
+                self.train_list.append((image_path, int(image_label)))
+
         self.transform = transform
         self.preprocess = preprocess
-        self.mask_img = cv2.imread("mask_img.png", cv2.IMREAD_UNCHANGED)
-        self.glass_img = cv2.imread("glass_img3.png", cv2.IMREAD_UNCHANGED)
-        self.sunglass_img = cv2.imread("sunglass_img2.png", cv2.IMREAD_UNCHANGED)
 
+        # ✅ 加载 mask/glasses/sunglasses 图片
+        base_path = "/home/srp/face_recognition/training_mode/conventional_training"
+        self.mask_img = cv2.imread(os.path.join(base_path, "mask_img.png"), cv2.IMREAD_UNCHANGED)
+        self.glass_img = cv2.imread(os.path.join(base_path, "glass_img3.png"), cv2.IMREAD_UNCHANGED)
+        self.sunglass_img = cv2.imread(os.path.join(base_path, "sunglass_img2.png"), cv2.IMREAD_UNCHANGED)
+
+        # ✅ 检查是否加载成功
+        assert self.mask_img is not None, "❌ mask_img.png 加载失败，请检查路径"
+        assert self.glass_img is not None, "❌ glass_img3.png 加载失败，请检查路径"
+        assert self.sunglass_img is not None, "❌ sunglass_img2.png 加载失败，请检查路径"
     def __len__(self):
         return len(self.train_list)
     def __getitem__(self, index):

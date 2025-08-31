@@ -13,6 +13,7 @@ import torch
 from torch import optim
 from torch.utils.data import DataLoader
 from torch.nn.utils import clip_grad_norm_
+
 import torch.nn.functional as F
 from tensorboardX import SummaryWriter
 import torchvision.transforms as transforms
@@ -20,7 +21,7 @@ import torchvision.datasets as dsets
 import os.path as osp
 sys.path.append('../../')
 from utils.AverageMeter import AverageMeter
-from data_processor.train_dataset import ImageDataset,ImageDataset_KD, ImageDataset_KD_glasses, ImageDataset_KD_glasses_sunglasses, ImageDataset_KD_glasses_sunglasses_save
+from data_processor.train_dataset import ImageDataset,ImageDataset_KD,ImageDataset_Crop, ImageDataset_KD_glasses, ImageDataset_KD_glasses_sunglasses, ImageDataset_KD_glasses_sunglasses_save
 from backbone.backbone_def import BackboneFactory
 from head.head_def import HeadFactory
 from backbone.iresnet import iresnet100
@@ -29,6 +30,7 @@ import random
 import numpy as np
 import torch.nn as nn
 # os.environ["CUDA_VISIBLE_DEVICES"] = '1'
+from supcon import SupConLoss
 
 logger.basicConfig(level=logger.INFO, 
                    format='%(levelname)s %(asctime)s %(filename)s: %(lineno)d] %(message)s',
@@ -166,9 +168,13 @@ def train_one_epoch(data_loader, backbone_teacher, backbone_student, header, cli
         # prob = torch.tensor([[1.0,0]]*images.shape[0], dtype=torch.float32).to(conf.device)
         # print(prob.shape)
         features_adapt = adapt_model(features_student, prob)# F.normalize( )
-        thetas = header(features_adapt, labels)
+        features_for_supcon = features_adapt.unsqueeze(1)   # [bsz, 1, 512]
+        #loss_v1 = supcon_criterion(features_for_supcon, labels)
+        loss_v1 = supcon_criterion(features_for_supcon, labels=None)
+
+        # thetas = header(features_adapt, labels)
         # print(gloss.shape), gloss+gloss.sum()
-        loss_v1 = criterion(thetas, labels)
+        #loss_v1 = criterion(thetas, labels) #原交叉熵loss
         loss_v2 = conf.w*(criterion2(features_student, features_teacher))# +10*conf.w*(criterion3(pred, features_teacher))
         loss_v = loss_v1 + loss_v2
         loss_v.backward()#compute
@@ -240,7 +246,7 @@ def train(conf):
              transforms.ToTensor(),
              transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
              ])
-    clip_model, preprocess = clip.load("/mnt/diskB/lyx/clip_model/RN50x16.pt", device=torch.device(conf.device))
+    clip_model, preprocess = clip.load("RN50x16", device=torch.device(conf.device))
     clip_model.eval()
     text = clip.tokenize(["A human face","A human face in a mask","A human face with glasses" , "A human face with sunglasses"]).to(conf.device) # without a mask
     conf.category_mum = text.shape[0]
@@ -259,9 +265,10 @@ def train(conf):
     adapt_model = adapt_model.cuda(conf.device)
     '''
     data
-    '''
-    data_loader = DataLoader(ImageDataset_KD_glasses_sunglasses(conf.data_root, conf.train_file,transform=transform,preprocess=preprocess), 
+     '''
+    data_loader = DataLoader(ImageDataset_Crop(conf.data_root, conf.train_file,transform=transform,preprocess=preprocess),
                                conf.batch_size, True, num_workers = 4)
+    
     '''
     teacher
     '''
@@ -281,7 +288,9 @@ def train(conf):
         except (FileNotFoundError, KeyError, IndexError, RuntimeError):
             logger.info("load student backbone resume init, failed!")
     backbone_teacher.eval()
-    backbone_teacher = backbone_teacher.cuda(conf.device)# torch.nn.DataParallel(backbone_teacher).cuda(conf.device)
+    # backbone_teacher = backbone_teacher.cuda(conf.device)# torch.nn.DataParallel(backbone_teacher).cuda(conf.device)
+    backbone_teacher = torch.nn.DataParallel(backbone_teacher).cuda(conf.device)# torch.nn.DataParallel(backbone_teacher).cuda(conf.device)
+
     # backbone_student.train()
     # backbone_factory = BackboneFactory(conf.backbone_type, conf.backbone_conf_file)    
     header = HeadFactory(conf.head_type, conf.head_conf_file).get_head()
@@ -311,7 +320,9 @@ def train(conf):
     lr_schedule_adapt = optim.lr_scheduler.MultiStepLR(
         adapt_optimizer, milestones = conf.milestones, gamma = 0.1)
 
-    model = backbone_student.cuda(conf.device)# torch.nn.DataParallel(backbone_student).cuda(conf.device)
+    #model = backbone_student.cuda(conf.device)# torch.nn.DataParallel(backbone_student).cuda(conf.device)
+    model = torch.nn.DataParallel(backbone_student).cuda(conf.device)# torch.nn.DataParallel(backbone_student).cuda(conf.device)
+
     parameters = [p for p in backbone_student.parameters() if p.requires_grad]
     model_optimizer = optim.SGD(parameters, lr = conf.lr, 
                           momentum = conf.momentum, weight_decay = 1e-4)
@@ -324,7 +335,9 @@ def train(conf):
     # This function computes the average loss over an epoch, that is, the average of the loss over each sample.
     model.train()
 
-    header=header.cuda(conf.device)# torch.nn.DataParallel(header).cuda(conf.device)
+    # header=header.cuda(conf.device)# torch.nn.DataParallel(header).cuda(conf.device)
+    header=torch.nn.DataParallel(header).cuda(conf.device)# torch.nn.DataParallel(header).cuda(conf.device)
+
     parameters = [p for p in header.parameters() if p.requires_grad]
     header_optimizer = optim.SGD(parameters, lr = conf.lr, 
                           momentum = conf.momentum, weight_decay = 1e-4)
@@ -406,6 +419,8 @@ if __name__ == '__main__':
     conf.add_argument("--device", type = str, default='cuda:0',
                       help = "dviece.")               
     args = conf.parse_args()
+    supcon_criterion = SupConLoss(temperature=0.07).to(args.device)
+
     args.milestones = [int(num) for num in args.step.split(',')]
     set_seed(args.seed)
     if not os.path.exists(args.out_dir):
