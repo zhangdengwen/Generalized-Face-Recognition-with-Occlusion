@@ -1,20 +1,46 @@
-# 忽略输出目录
-*.pth
-out_dir/
-out_dir_暴力裁剪/
-out_dir_原论文/
-out_dir_crop/
-out_dir_supcon_withlabel/
-pretrained_models/
-test_data/
-data/
-# 忽略 VSCode 配置文件夹
-.vscode/
+# =========================
+# 1) outputs / experiments
+# =========================
+out_dir*/
+out_dir
+out_dir*
+*out_dir*
 
-# 忽略 Python 缓存文件
+# 你这里有带引号、带=号的 out_dir 目录，也要排除
+'out_dir*'
+out_dir_*
+
+
+# =========================
+# 2) datasets
+# =========================
+data/
+test_data/
+pretrained_models/
+
+# =========================
+# 3) logs / cache / tmp
+# =========================
+log/
+logs/
+*.log
+*.tmp
+
 __pycache__/
 *.pyc
 
-# 忽略虚拟环境目录
-.env/
-venv/
+# tensorboard
+runs/
+events.out.tfevents.*
+
+# checkpoints (如果你有)
+*.pth
+*.pt
+*.ckpt
+
+
+# =========================
+# 4) system
+# =========================
+.DS_Store
+Thumbs.db
